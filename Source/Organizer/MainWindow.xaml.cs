@@ -38,7 +38,7 @@ namespace Organizer
             catch (Exception)
             {
                 _vmodel = new MainViewModel();
-                _vmodel.AddBoard.Execute(null);
+                //_vmodel.AddBoard.Execute(null);
             }
 
             this.DataContext = _vmodel;

@@ -24,10 +24,10 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button Margin="10,2" Height="24" Command="{Binding AddBoard}">+</Button>
+            <Button Margin="10,2" Height="24" Command="{Binding StickerBoards.AddCommand}">+</Button>
         </StackPanel>
 
-        <Border Grid.Column="1" Background="#eeeeee" DataContext="{Binding CurrentStickerBoard}" >
+        <Border Grid.Column="1" Background="#eeeeee" DataContext="{Binding StickerBoards.Current}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -36,7 +36,7 @@
                 
                 <Border Background="#cccccc">
                     <StackPanel Orientation="Horizontal">
-                        <Button Padding="3" Command="{Binding AddSticker}">+</Button>
+                        <Button Padding="3" Command="{Binding Stickers.AddCommand}">+</Button>
                     </StackPanel>
                 </Border>
 

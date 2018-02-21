@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using Common.Collections;
 using Common.MvvmBase;
 
 namespace Organizer.ViewModel
 {
-    public class StickerViewModel : BindableObject
+    public class StickerViewModel : BindableObject, ICollectionItem<StickerViewModel>
     {
+        [XmlIgnore]
+        public SimpleCollection<StickerViewModel> ParentCollection { get; set; }
+
         public StickerViewModel()
         {
-            
+            Height = 100;
+            Width = 100;
+            Top = 10;
+            Left = 10;
         }
 
         #region SavingState
@@ -28,8 +35,6 @@ namespace Organizer.ViewModel
 
         #endregion
 
-        [XmlIgnore]
-        public StickerBoardViewModel Parent { get; set; }
 
         private string _text;
         public string Text
@@ -57,5 +62,6 @@ namespace Organizer.ViewModel
         }
 
 
+        
     }
 }

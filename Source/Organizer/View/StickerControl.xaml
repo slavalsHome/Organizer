@@ -27,7 +27,7 @@
                 </Thumb>
             </Border>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Padding="3" Command="{Binding Parent.RemoveStickerCommand}" CommandParameter="{Binding}">D</Button>
+                <Button Padding="3" Command="{Binding ParentCollection.RemoveCommand}" CommandParameter="{Binding}">D</Button>
             </StackPanel>
             <Border Grid.Row="1"  Background="#eeffff">
                 <Grid>

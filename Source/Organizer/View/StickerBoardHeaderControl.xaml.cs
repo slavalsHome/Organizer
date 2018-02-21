@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Common.Collections;
 using Organizer.ViewModel;
 
 namespace Organizer.View
@@ -29,7 +30,7 @@ namespace Organizer.View
         private void TxTextBlock_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             var board = ((StickerBoardViewModel) DataContext);
-            board.Parent.CurrentStickerBoard = board;
+            ((SimpleSelectedCollection<StickerBoardViewModel>)board.ParentCollection).Current = board;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
