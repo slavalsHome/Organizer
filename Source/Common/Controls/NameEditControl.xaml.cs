@@ -13,31 +13,30 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Common.Collections;
-using Organizer.ViewModel;
 
-namespace Organizer.View
+namespace Common.Controls
 {
     /// <summary>
-    /// Interaction logic for StickerBoardHeaderControl.xaml
+    /// Interaction logic for NameEditControl.xaml
     /// </summary>
-    public partial class StickerBoardHeaderControl : UserControl
+    public partial class NameEditControl : UserControl
     {
-        public StickerBoardHeaderControl()
+        public NameEditControl()
         {
             InitializeComponent();
         }
 
         private void TxTextBlock_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            var board = ((StickerBoardViewModel) DataContext);
-            ((SimpleSelectedCollection<StickerBoardViewModel>)board.ParentCollection).Current = board;
+            var item = (ISelectedCollectionItem) DataContext;
+            item.ParentCollection.Current = item;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             if (txText.Visibility == Visibility.Hidden)
             {
-                var board = (StickerBoardViewModel) DataContext;
+                var board = (INotifyPropertyChanged)DataContext;
                 board.PropertyChanged -= OnVModelPropertyChanged;
                 board.PropertyChanged += OnVModelPropertyChanged;
 
@@ -58,17 +57,13 @@ namespace Organizer.View
         {
             if (e.PropertyName == "IsSelected")
             {
-                var board = (StickerBoardViewModel)sender;
+                var board = (ISelectedCollectionItem)sender;
                 if (!board.IsSelected)
                 {
                     txText.Visibility = Visibility.Hidden;
                     txTextBlock.Visibility = Visibility.Visible;
                 }
             }
-        }
-
-        private void TxText_OnLostFocus(object sender, RoutedEventArgs e)
-        {
         }
     }
 }

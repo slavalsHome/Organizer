@@ -1,8 +1,7 @@
 ﻿namespace Common.Collections
 {
-    public interface ICollectionItem<T>
-        where T : class, ICollectionItem<T>, new()
+    public interface ICollectionItem
     {
-        SimpleCollection<T> ParentCollection { get; set; }  
+        ICollection ParentCollection { get; set; }  
     }
 }

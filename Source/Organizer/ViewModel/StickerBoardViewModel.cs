@@ -11,10 +11,18 @@ using Common.MvvmBase;
 
 namespace Organizer.ViewModel
 {
-    public class StickerBoardViewModel : BindableObject, ISelectedCollectonItem<StickerBoardViewModel>
+    public class StickerBoardViewModel : BindableObject, ISelectedCollectionItem
     {
         [XmlIgnore]
-        public SimpleCollection<StickerBoardViewModel> ParentCollection { get; set; }
+        public ISelectedCollection ParentCollection { get; set; }
+
+        [XmlIgnore]
+        ICollection ICollectionItem.ParentCollection
+        {
+            get { return ParentCollection; }
+            set { ParentCollection = (ISelectedCollection)value; }
+        }
+
 
         public StickerBoardViewModel()
         {
@@ -36,6 +44,8 @@ namespace Organizer.ViewModel
 
         private bool _isSelected;
 
+
+
         [XmlIgnore]
         public bool IsSelected
         {
@@ -49,7 +59,7 @@ namespace Organizer.ViewModel
 
         public SimpleCollection<StickerViewModel> Stickers { get; set; }
 
-        
-        
+
+
     }
 }

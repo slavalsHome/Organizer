@@ -6,8 +6,8 @@ using Common.MvvmBase;
 
 namespace Common.Collections
 {
-    public class SimpleCollection<T> : ObservableCollection<T>
-        where T : class, ICollectionItem<T>, new()
+    public class SimpleCollection<T> : ObservableCollection<T>, ICollection
+        where T : class, ICollectionItem, new()
     {
         public SimpleCollection()
         {
@@ -21,7 +21,7 @@ namespace Common.Collections
             {
                 foreach (var newItem in e.NewItems)
                 {
-                    ((ICollectionItem<T>) newItem).ParentCollection = this;
+                    ((ICollectionItem) newItem).ParentCollection = this;
                 }
             }
         }

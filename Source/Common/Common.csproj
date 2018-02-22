@@ -43,9 +43,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ICollection.cs" />
+    <Compile Include="Collections\ISelectedCollection.cs" />
+    <Compile Include="Controls\NameEditControl.xaml.cs">
+      <DependentUpon>NameEditControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\VisToBool.cs" />
     <Compile Include="Collections\ICollectionItem.cs" />
-    <Compile Include="Collections\ISelectedCollectonItem.cs" />
+    <Compile Include="Collections\ISelectedCollectionItem.cs" />
     <Compile Include="MvvmBase\BindableObject.cs" />
     <Compile Include="MvvmBase\DialogEventArgs.cs" />
     <Compile Include="MvvmBase\Dialogs\DialogService.cs" />
@@ -61,7 +66,17 @@
     <Compile Include="Collections\SimpleSelectedCollection.cs" />
     <Compile Include="XmlWriter.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\NameEditControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icons\edit.png" />
+    <Resource Include="Icons\trash.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

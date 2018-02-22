@@ -5,8 +5,8 @@ using System.Linq;
 
 namespace Common.Collections
 {
-    public class SimpleSelectedCollection<T> : SimpleCollection<T>
-        where T : class, ISelectedCollectonItem<T>, new()
+    public class SimpleSelectedCollection<T> : SimpleCollection<T>, ISelectedCollection
+        where T : class, ISelectedCollectionItem, new()
     {
         public SimpleSelectedCollection()
         {
@@ -24,9 +24,9 @@ namespace Common.Collections
             }
         }
 
-        private T _current;
+        private ISelectedCollectionItem _current;
 
-        public T Current
+        public ISelectedCollectionItem Current
         {
             get { return _current; }
             set

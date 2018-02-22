@@ -8,10 +8,10 @@ using Common.MvvmBase;
 
 namespace Organizer.ViewModel
 {
-    public class StickerViewModel : BindableObject, ICollectionItem<StickerViewModel>
+    public class StickerViewModel : BindableObject, ICollectionItem
     {
         [XmlIgnore]
-        public SimpleCollection<StickerViewModel> ParentCollection { get; set; }
+        public ICollection ParentCollection { get; set; }
 
         public StickerViewModel()
         {
