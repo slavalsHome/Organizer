@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Xml.Serialization;
 using Common.Collections;
 using Common.MvvmBase;
+using StickerPlugin.ViewModel;
 
 namespace Organizer.ViewModel
 {

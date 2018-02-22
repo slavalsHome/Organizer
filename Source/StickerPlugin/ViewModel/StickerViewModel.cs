@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using Common.Collections;
 using Common.MvvmBase;
 
-namespace Organizer.ViewModel
+namespace StickerPlugin.ViewModel
 {
     public class StickerViewModel : BindableObject, ICollectionItem
     {

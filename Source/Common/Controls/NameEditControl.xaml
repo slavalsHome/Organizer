@@ -51,7 +51,6 @@
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
-                
             </Button>
         </StackPanel>
     </Grid>

@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Organizer.ViewModel;
+using StickerPlugin.ViewModel;
 
-namespace Organizer.View
+namespace StickerPlugin.View
 {
     /// <summary>
     /// Interaction logic for StickerControl.xaml
@@ -28,7 +28,7 @@ namespace Organizer.View
 
         private void Thumb_OnDragDelta(object sender, DragDeltaEventArgs e)
         {
-            var vmodel = (StickerViewModel) DataContext;
+            var vmodel = (StickerViewModel)DataContext;
             vmodel.Left = vmodel.Left + e.HorizontalChange;
             vmodel.Top = vmodel.Top + e.VerticalChange;
         }
