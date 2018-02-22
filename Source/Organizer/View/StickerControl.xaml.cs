@@ -31,7 +31,6 @@ namespace Organizer.View
             var vmodel = (StickerViewModel) DataContext;
             vmodel.Left = vmodel.Left + e.HorizontalChange;
             vmodel.Top = vmodel.Top + e.VerticalChange;
-            vmodel.RefreshProperties();
         }
 
         private void Thumb_OnDragDelta_2(object sender, DragDeltaEventArgs e)
@@ -39,7 +38,6 @@ namespace Organizer.View
             var vmodel = (StickerViewModel)DataContext;
             vmodel.Width = vmodel.Width + e.HorizontalChange;
             vmodel.Height = vmodel.Height + e.VerticalChange;
-            vmodel.RefreshProperties();
         }
 
         private void UIElement_OnLostFocus(object sender, RoutedEventArgs e)

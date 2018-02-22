@@ -22,30 +22,6 @@ namespace Organizer.ViewModel
             Stickers = new SimpleCollection<StickerViewModel>();
         }
 
-        #region SavingState
-
-        public List<StickerViewModel> StickersSaving { get; set; }
-
-        public void Save()
-        {
-            StickersSaving = new List<StickerViewModel>(Stickers);
-            foreach (var sticker in StickersSaving)
-            {
-                sticker.Save();
-            }
-        }
-
-        public void Load()
-        {
-            foreach (var sticker in StickersSaving)
-            {
-                Stickers.Add(sticker);
-                sticker.Load();
-            }
-        }
-
-        #endregion
-
         private string _name;
 
         public string Name
@@ -71,7 +47,6 @@ namespace Organizer.ViewModel
             }
         }
 
-        [XmlIgnore]
         public SimpleCollection<StickerViewModel> Stickers { get; set; }
 
         

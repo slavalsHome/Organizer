@@ -17,33 +17,7 @@ namespace Organizer.ViewModel
             StickerBoards = new SimpleSelectedCollection<StickerBoardViewModel>();
         }
 
-#region SavingState
-
-
-        public List<StickerBoardViewModel> StickerBoardsSaving { get; set; }
-
-        public void Save()
-        {
-            StickerBoardsSaving = new List<StickerBoardViewModel>(StickerBoards);
-            foreach (var stickerBoardViewModel in StickerBoardsSaving)
-            {
-                stickerBoardViewModel.Save();
-            }
-        }
-
-        public void Load()
-        {
-            foreach (var stickerBoardViewModel in StickerBoardsSaving)
-            {
-                StickerBoards.Add(stickerBoardViewModel);
-                stickerBoardViewModel.Load();
-            }
-        }
-
-#endregion
-
-        [XmlIgnore]
-        public SimpleSelectedCollection<StickerBoardViewModel> StickerBoards { get; private set; }
+        public SimpleSelectedCollection<StickerBoardViewModel> StickerBoards { get; set; }
 
     }
 }

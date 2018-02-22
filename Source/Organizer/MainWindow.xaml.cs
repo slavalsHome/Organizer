@@ -33,7 +33,7 @@ namespace Organizer
             try
             {
                 _vmodel = XmlWriter.Load<MainViewModel>("stickers.xml");
-                _vmodel.Load();
+                //_vmodel.Load();
             }
             catch (Exception)
             {
@@ -46,7 +46,7 @@ namespace Organizer
 
         private void MainWindow_OnClosed(object sender, EventArgs e)
         {
-            _vmodel.Save();
+            //_vmodel.Save();
             XmlWriter.Save(_vmodel, "stickers.xml");
 
         }

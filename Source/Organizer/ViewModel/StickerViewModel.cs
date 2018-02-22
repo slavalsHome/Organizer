@@ -21,21 +21,6 @@ namespace Organizer.ViewModel
             Left = 10;
         }
 
-        #region SavingState
-
-        public void Save()
-        {
-
-        }
-
-        public void Load()
-        {
-
-        }
-
-        #endregion
-
-
         private string _text;
         public string Text
         {
@@ -47,21 +32,49 @@ namespace Organizer.ViewModel
             }
         }
 
-        public double Height { get; set; }
-        public double Width { get; set; }
+        private double _height;
+        private double _width;
+        private double _top;
+        private double _left;
 
-        public double Top { get; set; }
-        public double Left { get; set; }
-
-        public void RefreshProperties()
+        public double Height
         {
-            OnPropertyChanged("Height");
-            OnPropertyChanged("Width");
-            OnPropertyChanged("Top");
-            OnPropertyChanged("Left");
+            get { return _height; }
+            set
+            {
+                _height = value;
+                OnPropertyChanged("Height");
+            }
         }
 
+        public double Width
+        {
+            get { return _width; }
+            set
+            {
+                _width = value;
+                OnPropertyChanged("Width");
+            }
+        }
 
-        
+        public double Top
+        {
+            get { return _top; }
+            set
+            {
+                _top = value;
+                OnPropertyChanged("Top");
+            }
+        }
+
+        public double Left
+        {
+            get { return _left; }
+            set
+            {
+                _left = value;
+                OnPropertyChanged("Left");
+            }
+        }
     }
 }
