@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Collections\ICollection.cs" />
     <Compile Include="Collections\ISelectedCollection.cs" />
+    <Compile Include="Controls\ButtonControl.xaml.cs">
+      <DependentUpon>ButtonControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NameEditControl.xaml.cs">
       <DependentUpon>NameEditControl.xaml</DependentUpon>
     </Compile>
@@ -52,7 +55,6 @@
     <Compile Include="Collections\ICollectionItem.cs" />
     <Compile Include="Collections\ISelectedCollectionItem.cs" />
     <Compile Include="MvvmBase\BindableObject.cs" />
-    <Compile Include="MvvmBase\DialogEventArgs.cs" />
     <Compile Include="MvvmBase\Dialogs\DialogService.cs" />
     <Compile Include="MvvmBase\Dialogs\ICustomClosedWindow.cs" />
     <Compile Include="MvvmBase\Dialogs\IDialog.cs" />
@@ -60,13 +62,18 @@
     <Compile Include="MvvmBase\Dialogs\IWindowViewModelMappings.cs" />
     <Compile Include="MvvmBase\Dialogs\ServiceLocator.cs" />
     <Compile Include="MvvmBase\RelayCommand.cs" />
-    <Compile Include="MvvmBase\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Collections\SimpleCollection.cs" />
     <Compile Include="Collections\SimpleSelectedCollection.cs" />
+    <Compile Include="ViewModel\CommandViewModel.cs" />
+    <Compile Include="ViewModel\IFacadeViewModel.cs" />
     <Compile Include="XmlWriter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ButtonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\NameEditControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

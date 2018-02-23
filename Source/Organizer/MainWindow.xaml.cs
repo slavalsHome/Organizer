@@ -30,25 +30,25 @@ namespace Organizer
 
         private void OnFormLoaded(object sender, RoutedEventArgs e)
         {
+            _vmodel = new MainViewModel();
             try
             {
-                _vmodel = XmlWriter.Load<MainViewModel>("stickers.xml");
-                //_vmodel.Load();
+                var plugin = XmlWriter.Load<StickerPlugin.ViewModel.MainViewModel>("stickers.xml");
+                _vmodel.Plugins.Add(plugin);
             }
             catch (Exception)
             {
                 _vmodel = new MainViewModel();
-                //_vmodel.AddBoard.Execute(null);
+                var plugin = new StickerPlugin.ViewModel.MainViewModel();
+                _vmodel.Plugins.Add(plugin);
             }
 
-            this.DataContext = _vmodel;
+            this.DataContext = _vmodel.Plugins[0];
         }
 
         private void MainWindow_OnClosed(object sender, EventArgs e)
         {
-            //_vmodel.Save();
-            XmlWriter.Save(_vmodel, "stickers.xml");
-
+            XmlWriter.Save(_vmodel.Plugins[0], "stickers.xml");
         }
     }
 }

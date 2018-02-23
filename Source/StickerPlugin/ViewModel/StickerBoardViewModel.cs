@@ -1,6 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Windows.Media.Imaging;
+using System.Xml.Serialization;
 using Common.Collections;
 using Common.MvvmBase;
+using Common.ViewModel;
 
 namespace StickerPlugin.ViewModel
 {
@@ -21,6 +24,14 @@ namespace StickerPlugin.ViewModel
         {
             Name = "new board";
             Stickers = new SimpleCollection<StickerViewModel>();
+
+            Commands = new SimpleCollection<CommandViewModel>();
+            var addCmd = new CommandViewModel();
+            addCmd.Command = Stickers.AddCommand;
+            addCmd.CommandParameter = null;
+            addCmd.Text = "Add Sticker";
+            addCmd.Image = new BitmapImage(new Uri("pack://application:,,,/StickerPlugin;component/Icons/add.png")); 
+            Commands.Add(addCmd);
         }
 
         private string _name;
@@ -52,7 +63,8 @@ namespace StickerPlugin.ViewModel
 
         public SimpleCollection<StickerViewModel> Stickers { get; set; }
 
-
+        [XmlIgnore]
+        public SimpleCollection<CommandViewModel> Commands { get; set; }
 
     }
 }

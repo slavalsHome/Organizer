@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Xml.Serialization;
 using Common.Collections;
 using Common.MvvmBase;
+using Common.ViewModel;
 using StickerPlugin.ViewModel;
 
 namespace Organizer.ViewModel
@@ -15,10 +16,10 @@ namespace Organizer.ViewModel
     {
         public MainViewModel()
         {
-            StickerBoards = new SimpleSelectedCollection<StickerBoardViewModel>();
+            Plugins = new List<IFacadeViewModel>();
         }
 
-        public SimpleSelectedCollection<StickerBoardViewModel> StickerBoards { get; set; }
+        public List<IFacadeViewModel> Plugins { get; set; }
 
     }
 }
