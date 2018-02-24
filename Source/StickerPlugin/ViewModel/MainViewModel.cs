@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 using Common.Collections;
 using Common.MvvmBase;
 using Common.ViewModel;
+using StickerPlugin.View;
 
 namespace StickerPlugin.ViewModel
 {
@@ -15,6 +16,8 @@ namespace StickerPlugin.ViewModel
     {
         public MainViewModel()
         {
+            DataTemplateSelector = new StickerPluginDataTemplateSelector();
+
             StickerBoards = new SimpleSelectedCollection<StickerBoardViewModel>();
             
             Commands = new SimpleCollection<CommandViewModel>();
@@ -31,5 +34,12 @@ namespace StickerPlugin.ViewModel
 
         [XmlIgnore]
         public SimpleCollection<CommandViewModel> Commands { get; set; }
+
+        #region IFacadeViewModel
+
+        [XmlIgnore]
+        public DataTemplateSelector DataTemplateSelector { get; private set; }
+
+        #endregion
     }
 }

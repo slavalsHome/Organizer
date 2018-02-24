@@ -48,6 +48,9 @@
     <Compile Include="Controls\ButtonControl.xaml.cs">
       <DependentUpon>ButtonControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CommonDataTemplateSelector.cs" />
+    <Compile Include="Controls\DataTemplateHelper.cs" />
+    <Compile Include="Controls\MainDataTemplateSelector.cs" />
     <Compile Include="Controls\NameEditControl.xaml.cs">
       <DependentUpon>NameEditControl.xaml</DependentUpon>
     </Compile>

@@ -4,6 +4,11 @@
         xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
         xmlns:view="clr-namespace:StickerPlugin.View;assembly=StickerPlugin"
         Title="MainWindow" Height="600" Width="800" Loaded="OnFormLoaded" Closed="MainWindow_OnClosed">
+    <Window.Resources>
+        <ResourceDictionary>
+            <controls:MainDataTemplateSelector x:Key="mainSelector"/>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -14,29 +19,19 @@
             <Grid Height="24" Background="#cccccc">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Boards</TextBlock>
             </Grid>
-            <ItemsControl ItemsSource="{Binding StickerBoards}">
+            <ItemsControl ItemsSource="{Binding StickerBoards}" ItemTemplateSelector="{StaticResource mainSelector}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:NameEditControl Height="26"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <ItemsControl Margin="10,0,10,0" ItemsSource="{Binding Commands}">
+            <ItemsControl Margin="10,0,10,0" ItemsSource="{Binding Commands}" ItemTemplateSelector="{StaticResource mainSelector}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:ButtonControl Height="26"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
 
@@ -48,17 +43,12 @@
                 </Grid.RowDefinitions>
                 
                 <Border Background="#cccccc">
-                    <ItemsControl ItemsSource="{Binding Commands}">
+                    <ItemsControl ItemsSource="{Binding Commands}" ItemTemplateSelector="{StaticResource mainSelector}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <controls:ButtonControl Height="26"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Border>
 

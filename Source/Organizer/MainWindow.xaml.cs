@@ -43,7 +43,9 @@ namespace Organizer
                 _vmodel.Plugins.Add(plugin);
             }
 
-            this.DataContext = _vmodel.Plugins[0];
+            _vmodel.Init();
+
+            this.DataContext = _vmodel.Root;
         }
 
         private void MainWindow_OnClosed(object sender, EventArgs e)
