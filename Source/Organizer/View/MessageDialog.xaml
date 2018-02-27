@@ -1,0 +1,61 @@
+﻿<Window x:Class="Organizer.View.MessageDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Header, FallbackValue=S-MANAGER}" Height="200" Width="400"
+        WindowStartupLocation="CenterOwner"
+        Icon="../Icons/sicon.ico">
+    <Border BorderThickness="0,1,0,0" BorderBrush="#333399" Background="#f8f8f8">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.ColumnSpan="3" Background="#eeeeee" BorderThickness="0,0,0,2" BorderBrush="#333399"></Border>
+            <TextBlock Grid.ColumnSpan="3" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="18" FontWeight="Bold" Foreground="#333399" TextAlignment="Center" Text="{Binding Message, FallbackValue=Are you sure that you want to remove the sticker?}"></TextBlock>
+
+            <Button Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,10" Height="36" Width="120" Click="OnClickYes" IsDefault="True">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border x:Name="PATH_border" Margin="5,4,4,4" Background="#333399" BorderThickness="2" BorderBrush="#333399" CornerRadius="3">
+                            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock x:Name="PATH_text"  FontWeight="Bold" VerticalAlignment="Center" Foreground="White">YES</TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter TargetName="PATH_border" Property="Background" Value="White" />
+                                <Setter TargetName="PATH_text" Property="Foreground" Value="#333399" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Margin="0,10,0,10" Height="36" Width="120" Click="OnClickNo" IsCancel="True" >
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border x:Name="PATH_border" Margin="5,4,4,4" Background="#333399" BorderThickness="2" BorderBrush="#333399" CornerRadius="3">
+                            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock x:Name="PATH_text"  FontWeight="Bold" VerticalAlignment="Center" Foreground="White">NO</TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter TargetName="PATH_border" Property="Background" Value="White" />
+                                <Setter TargetName="PATH_text" Property="Foreground" Value="#333399" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+    </Border>
+</Window>

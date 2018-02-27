@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Xml.Serialization;
+using Common.MvvmBase.Dialogs;
 
 namespace Common.Collections
 {
@@ -26,6 +28,7 @@ namespace Common.Collections
 
         private ISelectedCollectionItem _current;
 
+        [XmlIgnore]
         public ISelectedCollectionItem Current
         {
             get { return _current; }
@@ -55,6 +58,20 @@ namespace Common.Collections
 
         protected override void OnRemove(object obj)
         {
+            var dialogFactory = ParentViewModel as IDialogFactory;
+            if (dialogFactory != null)
+            {
+                IDialogService dialogService;
+                INotifyPropertyChanged vmodel;
+                INotifyPropertyChanged parent;
+                if (dialogFactory.GetDialog("OnRemove", obj, out dialogService, out vmodel, out parent))
+                {
+                    bool? res = dialogService.ShowDialog(parent, vmodel);
+                    if (!res.HasValue || !res.Value)
+                        return;
+                }
+            }
+
             var item = obj as T;
             if (item != null)
             {

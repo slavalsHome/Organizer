@@ -9,6 +9,8 @@ namespace Common.ViewModel
 {
     public interface IFacadeViewModel : INotifyPropertyChanged
     {
+        IParentFacadeViewModel ParentFacade { get; set; }
+
         DataTemplateSelector DataTemplateSelector { get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -41,5 +42,50 @@ namespace Common
             return result;
         }
 
+        public static void SaveWithBackup(object obj, string filename)
+        {
+            Save(obj, filename);
+            Save(obj, filename + ".bkp");
+        }
+
+        public static T LoadFromBackup<T>(string filename)
+        {
+            return Load<T>(filename + ".bkp");
+        }
+
+        public enum BackupState
+        {
+            Ok,
+            FileNotFoundAndBackupNotFound,
+            FileNotFoundButBackupFound,
+            BackupNotFound,
+            FileOlder,
+            BackupOlder
+        }
+
+        public static BackupState CheckBackup(string filename)
+        {
+            var file = new FileInfo(filename);
+            var backup = new FileInfo(filename + ".bkp");
+            if (!file.Exists)
+            {
+                if (backup.Exists)
+                    return BackupState.FileNotFoundButBackupFound;
+                return BackupState.FileNotFoundAndBackupNotFound;
+            }
+            
+            if (!backup.Exists)
+                return BackupState.BackupNotFound;
+
+            var span = backup.LastWriteTimeUtc - file.LastWriteTimeUtc;
+
+            if (span.TotalSeconds > 5)
+                return BackupState.FileOlder;
+
+            if (span.TotalSeconds < -5)
+                return BackupState.BackupOlder;
+
+            return BackupState.Ok;
+        }
     }
 }

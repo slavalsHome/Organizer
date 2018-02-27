@@ -61,6 +61,7 @@
     <Compile Include="MvvmBase\Dialogs\DialogService.cs" />
     <Compile Include="MvvmBase\Dialogs\ICustomClosedWindow.cs" />
     <Compile Include="MvvmBase\Dialogs\IDialog.cs" />
+    <Compile Include="MvvmBase\Dialogs\IDialogFactory.cs" />
     <Compile Include="MvvmBase\Dialogs\IDialogService.cs" />
     <Compile Include="MvvmBase\Dialogs\IWindowViewModelMappings.cs" />
     <Compile Include="MvvmBase\Dialogs\ServiceLocator.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Collections\SimpleSelectedCollection.cs" />
     <Compile Include="ViewModel\CommandViewModel.cs" />
     <Compile Include="ViewModel\IFacadeViewModel.cs" />
+    <Compile Include="ViewModel\IParentFacadeViewModel.cs" />
+    <Compile Include="ViewModel\MessageDialogViewModel.cs" />
     <Compile Include="XmlWriter.cs" />
   </ItemGroup>
   <ItemGroup>

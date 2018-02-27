@@ -3,70 +3,172 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
         xmlns:view="clr-namespace:StickerPlugin.View;assembly=StickerPlugin"
-        Title="MainWindow" Height="600" Width="800" Loaded="OnFormLoaded" Closed="MainWindow_OnClosed">
+        xmlns:dialogs="clr-namespace:Common.MvvmBase.Dialogs;assembly=Common"
+        Title="S-MANAGER" Height="600" Width="800" Loaded="OnFormLoaded" Closed="MainWindow_OnClosed"
+        Icon="../Icons/sicon.ico"
+        dialogs:DialogService.IsRegisteredView="True"
+        >
     <Window.Resources>
         <ResourceDictionary>
             <controls:MainDataTemplateSelector x:Key="mainSelector"/>
+            <controls:VisToBool Inverted="True" Not="False" x:Key="BoolToVis" />
+            <controls:VisToBool Inverted="True" Not="True" x:Key="BoolToNotVis" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Organizer;component/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition/>
+            <ColumnDefinition x:Name="leftSide" Width="180"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <StackPanel>
-            <Grid Height="24" Background="#cccccc">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Boards</TextBlock>
-            </Grid>
-            <ItemsControl ItemsSource="{Binding StickerBoards}" ItemTemplateSelector="{StaticResource mainSelector}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            <ItemsControl Margin="10,0,10,0" ItemsSource="{Binding Commands}" ItemTemplateSelector="{StaticResource mainSelector}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </StackPanel>
 
-        <Border Grid.Column="1" Background="#eeeeee" DataContext="{Binding StickerBoards.Current}" >
+        <GridSplitter Background="#333399" Grid.Column="1" Width="2" HorizontalAlignment="Stretch" />
+
+        <Border BorderThickness="2,2,0,2" BorderBrush="#333399">
+            <StackPanel Margin="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border BorderThickness="1" BorderBrush="#333399">
+                        <Grid Height="32" Background="#333399">
+                            <TextBlock Margin="10,0,0,0" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">STICKERS</TextBlock>
+                            
+                            
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+                                <Button Height="20" Width="20" Command="{Binding StickerBoards.AddCommand}">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Border x:Name="PATH_border" BorderThickness="2" BorderBrush="White"  CornerRadius="3">
+                                                <Canvas>
+                                                    <Rectangle x:Name="PATH_rect1" Canvas.Left="7" Canvas.Top="2" Width="2" Height="12" Fill="White" />
+                                                    <Rectangle x:Name="PATH_rect2" Canvas.Left="2" Canvas.Top="7" Width="12" Height="2" Fill="White" />
+                                                </Canvas>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="Button.IsMouseOver" Value="True">
+                                                    <Setter TargetName="PATH_border" Property="Background" Value="White" />
+                                                    <Setter TargetName="PATH_rect1" Property="Fill" Value="#333399" />
+                                                    <Setter TargetName="PATH_rect2" Property="Fill" Value="#333399" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+                                <Button Margin="2" Height="20" Width="20" Command="{Binding BoardsCollapseCommand}">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Border  x:Name="PATH_border" BorderThickness="2" BorderBrush="White" CornerRadius="3">
+                                                <Canvas>
+                                                    <Polygon Visibility="{Binding BoardsIsCollapsed, Converter={StaticResource BoolToVis}, FallbackValue=Visible}" x:Name="PATH_collapsed" Points="8,4 13,12 3,12" Stroke="White" Fill="White"/>
+                                                    <Polygon Visibility="{Binding BoardsIsCollapsed, Converter={StaticResource BoolToNotVis}, FallbackValue=Hidden}" x:Name="PATH_opened" Points="8,13 13,5 3,5" Stroke="White" Fill="White"/>
+                                                </Canvas>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="Button.IsMouseOver" Value="True">
+                                                    <Setter TargetName="PATH_border" Property="Background" Value="White" />
+                                                    <Setter TargetName="PATH_collapsed" Property="Fill" Value="#333399" />
+                                                    <Setter TargetName="PATH_opened" Property="Fill" Value="#333399" />
+                                                    <Setter TargetName="PATH_collapsed" Property="Stroke" Value="#333399" />
+                                                    <Setter TargetName="PATH_opened" Property="Stroke" Value="#333399" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+
+
+
+ 
+
+                                <ItemsControl Visibility="Collapsed" Margin="0,0,0,0" ItemsSource="{Binding Commands}" ItemTemplateSelector="{StaticResource mainSelector}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Border Visibility="{Binding BoardsIsCollapsed, Converter={StaticResource BoolToNotVis}, FallbackValue=Hidden}" Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#333399">
+                        <StackPanel>
+                            <ItemsControl ItemsSource="{Binding StickerBoards}" ItemTemplateSelector="{StaticResource mainSelector}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="2" BorderThickness="0,2,2,2" BorderBrush="#333399" Background="#eeeeee" DataContext="{Binding StickerBoards.Current}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                
-                <Border Background="#cccccc">
-                    <ItemsControl ItemsSource="{Binding Commands}" ItemTemplateSelector="{StaticResource mainSelector}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+
+                <Border Background="White" BorderThickness="0,0,0,2" BorderBrush="#333399" Height="37">
+                    <StackPanel Orientation="Horizontal">
+
+                        <Button Command="{Binding Stickers.AddCommand}">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="PATH_border" Margin="5,4,4,4" Background="#333399" BorderThickness="2" BorderBrush="#333399" CornerRadius="3">
+                                        <StackPanel Margin="0,0,4,0" Orientation="Horizontal">
+                                            <Border BorderThickness="2" BorderBrush="Transparent" Height="20" Width="20" CornerRadius="3">
+                                                <Canvas>
+                                                    <Rectangle x:Name="PATH_rect1" Canvas.Left="7" Canvas.Top="2" Width="2" Height="12" Fill="White" />
+                                                    <Rectangle x:Name="PATH_rect2" Canvas.Left="2" Canvas.Top="7" Width="12" Height="2" Fill="White" />
+                                                </Canvas>
+                                            </Border>
+                                            <TextBlock x:Name="PATH_text"  FontWeight="Bold" VerticalAlignment="Center" Foreground="White">ADD STICKER</TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="Button.IsMouseOver" Value="True">
+                                            <Setter TargetName="PATH_border" Property="Background" Value="White" />
+                                            <Setter TargetName="PATH_text" Property="Foreground" Value="#333399" />
+                                            <Setter TargetName="PATH_rect1" Property="Fill" Value="#333399" />
+                                            <Setter TargetName="PATH_rect2" Property="Fill" Value="#333399" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        
+
+                        <ItemsControl Visibility="Hidden" Margin="0" ItemsSource="{Binding Commands}" ItemTemplateSelector="{StaticResource mainSelector}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
                 </Border>
 
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding Stickers}">
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding Stickers}" ItemTemplateSelector="{StaticResource mainSelector}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Canvas/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <view:StickerControl Width="{Binding Width}" Height="{Binding Height}">
-                                <view:StickerControl.RenderTransform>
-                                    <TranslateTransform X="{Binding Left}" Y="{Binding Top}"/>
-                                </view:StickerControl.RenderTransform>
-                            </view:StickerControl>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Grid>
         </Border>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -51,6 +52,42 @@ namespace StickerPlugin.View
             txTextBlock.Visibility = Visibility.Hidden;
             txText.Visibility = Visibility.Visible;
             txText.Focus();
+        }
+
+        private DateTime _lostFocusTime = DateTime.MinValue;
+
+        private void OnHeaderEditClick(object sender, RoutedEventArgs e)
+        {
+            if ((DateTime.Now - _lostFocusTime).TotalMilliseconds < 1000)
+            {
+                _lostFocusTime = DateTime.MinValue;
+                return;
+            }
+
+            if (txHeaderBox.Visibility == Visibility.Hidden)
+            {
+                txHeaderBox.Visibility = Visibility.Visible;
+                txHeaderBox.SelectAll();
+                txHeaderBox.Focus();
+                txHeaderBlock.Visibility = Visibility.Hidden;
+            }
+            /*else
+            {
+                txHeaderBlock.Visibility = Visibility.Visible;
+                txHeaderBox.Visibility = Visibility.Hidden;
+            }*/
+        }
+
+        private void OnHeaderBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            _lostFocusTime = DateTime.Now;
+            txHeaderBlock.Visibility = Visibility.Visible;
+            txHeaderBox.Visibility = Visibility.Hidden;
+        }
+
+        private void OnFontEditClick(object sender, RoutedEventArgs e)
+        {
+            fontEditPopup.IsOpen = !fontEditPopup.IsOpen;
         }
     }
 }
